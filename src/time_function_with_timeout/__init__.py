@@ -10,10 +10,13 @@ def time_function_with_timeout(function, timeout=0, *args, **kwargs):
         run.value = function(*args, **kwargs)
     run.value = None
 
+    start_time = time.time()
     thread = threading.Thread(target=run)
     thread.start()
     thread.join(timeout)
+    end_time = time.time()
+    timing = end_time - start_time
     if thread.is_alive():
         raise TimeoutError("Function timed out after {} seconds".format(timeout))
-    return run.value
+    return timing,run.value
 

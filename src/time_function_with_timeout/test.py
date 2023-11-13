@@ -6,7 +6,7 @@ def test_half_second_function():
     def half_second_function():
         time.sleep(0.5)
 
-    timing = time_function_with_timeout(half_second_function, 0.5)
+    timing,_ = time_function_with_timeout(half_second_function, 0.6)
     assert timing > 0.49 and timing < 0.51
 
 def test_function_returns():
